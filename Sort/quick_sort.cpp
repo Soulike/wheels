@@ -1,6 +1,6 @@
 #include <functional>
+#include <iterator>
 #include <random>
-#include <vector>
 
 class quick_sort {
  public:
@@ -8,7 +8,7 @@ class quick_sort {
   void operator()(const RandomIt& first, const RandomIt& last) {
     quick_sort_impl(
         first, last,
-        std::less_equal<typename std::iterator_traits<RandomIt>::value_type>());
+        std::less<typename std::iterator_traits<RandomIt>::value_type>());
   }
 
   template <typename RandomIt, typename Compare>
