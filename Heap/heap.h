@@ -28,14 +28,9 @@ class heap {
 
   static void heapify(decltype(heap<T, Comp>::container)& container,
                       const decltype(heap<T, Comp>::comp)& comp);
-  /**
-   * Heapify part of the tree.
-   */
-  static void heapify(decltype(heap<T, Comp>::container)& container,
-                      index_type parent_index,
-                      const decltype(heap<T, Comp>::comp)& comp);
-  static void front_shift_down(decltype(heap<T, Comp>::container)& container,
-                               const decltype(heap<T, Comp>::comp)& comp);
+  static void shift_down(decltype(heap<T, Comp>::container)& container,
+                         index_type index,
+                         const decltype(heap<T, Comp>::comp)& comp);
   static void back_shift_up(decltype(heap<T, Comp>::container)& container,
                             const decltype(heap<T, Comp>::comp)& comp);
   static constexpr index_type get_parent_index(index_type child_index) noexcept;

@@ -26,7 +26,7 @@ template <typename T, typename Comp>
 void heap<T, Comp>::pop() {
   std::swap(container.front(), container.back());
   container.pop_back();
-  front_shift_down(container, comp);
+  shift_down(container, 0, comp);
 }
 
 template <typename T, typename Comp>
@@ -56,47 +56,15 @@ void heap<T, Comp>::heapify(decltype(heap<T, Comp>::container)& container,
 
   for (int parent_index = last_parent_index; parent_index >= 0;
        parent_index--) {
-    heapify(container, parent_index, comp);
+    shift_down(container, parent_index, comp);
   }
 }
 
 template <typename T, typename Comp>
-void heap<T, Comp>::heapify(decltype(heap<T, Comp>::container)& container,
-                            heap::index_type parent_index,
-                            const decltype(heap<T, Comp>::comp)& comp) {
-  while (true) {
-    const auto left_child_index = get_left_child_index(parent_index);
-    const auto right_child_index = get_right_child_index(parent_index);
-    int largest_child_index = parent_index;
-
-    if (left_child_index < container.size() &&
-        comp(container[largest_child_index], container[left_child_index])) {
-      largest_child_index = left_child_index;
-    }
-
-    if (right_child_index < container.size() &&
-        comp(container[largest_child_index], container[right_child_index])) {
-      largest_child_index = right_child_index;
-    }
-
-    if (largest_child_index != parent_index) {
-      std::swap(container[parent_index], container[largest_child_index]);
-      parent_index = largest_child_index;
-    } else {
-      break;
-    }
-  }
-}
-
-template <typename T, typename Comp>
-void heap<T, Comp>::front_shift_down(
-    decltype(heap<T, Comp>::container)& container,
-    const decltype(heap<T, Comp>::comp)& comp) {
-  if (container.empty()) {
-    return;
-  }
-
-  index_type current_index = 0;
+void heap<T, Comp>::shift_down(decltype(heap<T, Comp>::container)& container,
+                               heap::index_type index,
+                               const decltype(heap<T, Comp>::comp)& comp) {
+  index_type current_index = index;
   while (true) {
     const auto left_child_index = get_left_child_index(current_index);
     const auto right_child_index = get_right_child_index(current_index);
