@@ -8,4 +8,7 @@ add_executable(wheels
         UnionFindSet/union_find_set.cpp
         PrefixTree/prefix_tree.h
         PrefixTree/prefix_tree.cpp
-        Sort/quick_sort.cpp)
+        Sort/quick_sort.cpp
+        Heap/heap.cpp
+        Heap/heap.h
+        Sort/heap_sort.cpp)
