@@ -2,27 +2,12 @@
 #include <iterator>
 #include <random>
 
-class quick_sort {
+class quick_sort_impl {
  public:
-  template <typename RandomIt>
-  void operator()(const RandomIt& first, const RandomIt& last) {
-    quick_sort_impl(
-        first, last,
-        std::less<typename std::iterator_traits<RandomIt>::value_type>());
-  }
-
   template <typename RandomIt, typename Compare>
-  void operator()(const RandomIt& first,
-                  const RandomIt& last,
-                  const Compare& comp) {
-    quick_sort_impl(first, last, comp);
-  }
-
- private:
-  template <typename RandomIt, typename Compare>
-  void quick_sort_impl(const RandomIt& first,
-                       const RandomIt& last,
-                       const Compare& comp) {
+  static void sort(const RandomIt& first,
+                   const RandomIt& last,
+                   const Compare& comp) {
     if (first >= last) {
       return;
     }
@@ -46,10 +31,11 @@ class quick_sort {
     }
     std::iter_swap(pivot_it, right);
 
-    quick_sort_impl(first, right, comp);
-    quick_sort_impl(right + 1, last, comp);
+    sort(first, right, comp);
+    sort(right + 1, last, comp);
   }
 
+ private:
   static int generate_random_int(const int begin, const int end) {
     std::random_device random_device;
     std::mt19937 gen(random_device());
@@ -57,3 +43,16 @@ class quick_sort {
     return distribution(gen);
   }
 };
+
+template <typename RandomIt, typename Compare>
+void quick_sort(const RandomIt& first,
+                const RandomIt& last,
+                const Compare& comp) {
+  return quick_sort_impl::sort(first, last, comp);
+}
+
+template <typename RandomIt>
+void quick_sort(const RandomIt& first, const RandomIt& last) {
+  return quick_sort_impl::sort(first, last,
+                               std::less<std::iter_value_t<RandomIt>>());
+}
