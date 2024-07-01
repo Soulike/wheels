@@ -8,6 +8,22 @@ union_find_set::union_find_set(union_find_set::size_type n) {
   _set_count = n;
 }
 
+union_find_set::union_find_set(const union_find_set& other)
+    : _set_count(other._set_count), _parents(other._parents) {}
+
+union_find_set::union_find_set(union_find_set&& other) noexcept
+    : _set_count(other._set_count), _parents(std::move(other._parents)) {}
+
+union_find_set& union_find_set::operator=(const union_find_set& other) {
+  this->_set_count = other._set_count;
+  this->_parents = other._parents;
+}
+
+union_find_set& union_find_set::operator=(union_find_set&& other) noexcept {
+  this->_set_count = other._set_count;
+  this->_parents = std::move(other._parents);
+}
+
 union_find_set::size_type union_find_set::size() const noexcept {
   return _parents.size();
 }

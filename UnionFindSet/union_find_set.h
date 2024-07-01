@@ -8,7 +8,13 @@ class union_find_set {
   using size_type = std::vector<element_type>::size_type;
 
   explicit union_find_set(size_type n);
+  union_find_set(const union_find_set& other);
+  union_find_set(union_find_set&& other) noexcept;
   ~union_find_set() = default;
+
+  union_find_set& operator=(const union_find_set& other);
+  union_find_set& operator=(union_find_set&& other) noexcept;
+
   size_type size() const noexcept;
   size_type set_count() noexcept;
   void do_union(const element_type& element1, const element_type& element2);
