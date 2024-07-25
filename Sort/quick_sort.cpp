@@ -1,6 +1,6 @@
+#include <cstdlib>
 #include <functional>
 #include <iterator>
-#include <random>
 
 class quick_sort_impl {
  public:
@@ -37,10 +37,7 @@ class quick_sort_impl {
 
  private:
   static int generate_random_int(const int begin, const int end) {
-    std::random_device random_device;
-    std::mt19937 gen(random_device());
-    std::uniform_int_distribution<> distribution(begin, end - 1);
-    return distribution(gen);
+    return begin + std::rand() % (end - begin + 1);
   }
 };
 
