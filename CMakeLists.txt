@@ -11,4 +11,5 @@ add_executable(wheels
         Sort/quick_sort.cpp
         Heap/heap.cpp
         Heap/heap.h
-        Sort/heap_sort.cpp)
+        Sort/heap_sort.cpp
+        Graph/Floyd.cpp)
