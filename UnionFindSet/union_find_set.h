@@ -16,7 +16,7 @@ class union_find_set {
   union_find_set& operator=(union_find_set&& other) noexcept;
 
   size_type size() const noexcept;
-  size_type set_count() noexcept;
+  size_type set_count() const noexcept;
   void do_union(const element_type& element1, const element_type& element2);
   bool is_in_one_set(const element_type& element1,
                      const element_type& element2);
