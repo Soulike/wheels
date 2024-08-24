@@ -12,4 +12,8 @@ add_executable(wheels
         Heap/heap.cpp
         Heap/heap.h
         Sort/heap_sort.cpp
-        Graph/Floyd.cpp)
+        Graph/Floyd.cpp
+        Math/math.cpp
+        Math/math.h
+        Math/Fraction/Fraction.cpp
+        Math/Fraction/Fraction.h)
