@@ -4,8 +4,8 @@ project(wheels)
 set(CMAKE_CXX_STANDARD 23)
 
 add_executable(wheels
-        UnionFindSet/union_find_set.h
-        UnionFindSet/union_find_set.cpp
+        UnionFindSet/UnionFindSet.h
+        UnionFindSet/UnionFindSet.cpp
         PrefixTree/prefix_tree.h
         PrefixTree/prefix_tree.cpp
         Sort/quick_sort.cpp
