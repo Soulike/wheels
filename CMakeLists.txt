@@ -1,19 +1,15 @@
 cmake_minimum_required(VERSION 3.28)
 project(wheels)
+find_package(GTest REQUIRED)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(wheels
-        UnionFindSet/UnionFindSet.h
-        UnionFindSet/UnionFindSet.cpp
-        PrefixTree/prefix_tree.h
-        PrefixTree/prefix_tree.cpp
-        Sort/quick_sort.cpp
-        Heap/heap.cpp
-        Heap/heap.h
-        Sort/heap_sort.cpp
-        Graph/Floyd.cpp
-        Math/math.cpp
-        Math/math.h
-        Math/Fraction/Fraction.cpp
-        Math/Fraction/Fraction.h)
+add_executable(run_tests
+        Math/combination.test.cpp
+        Math/combination.cpp
+        Math/combination.h)
+
+target_link_libraries(run_tests GTest::GTest GTest::Main)
+
+enable_testing()
+add_test(NAME wheels_test COMMAND run_tests)
