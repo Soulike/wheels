@@ -18,7 +18,8 @@
   },
   "scripts": {
     "prepare": "husky",
-    "test": "jest"
+    "test:js": "jest",
+    "test:cpp": "cmake -S . -B ./build && cd ./build && make && ctest && cd .. && rm -rf ./build"
   },
   "prettier": {
     "tabWidth": 2,
