@@ -11,32 +11,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          check-latest: true
+          cache: 'pnpm'
+      - name: Install Dependencies
+        run: pnpm install
+      - name: Install C++ tools and gtest
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake libgtest-dev
+          cd /usr/src/gtest
+          sudo cmake .
+          sudo make
+          sudo cp lib/*.a /usr/lib
 
-    - name: Install Node.js LTS
-      uses: actions/setup-node@v4
-      with:
-        node-version: 'lts/*'
-        cache: 'pnpm'
+      - name: Run JavaScript Tests
+        run: pnpm test:js
 
-    - name: Install pnpm
-      run: corepack enable && corepack prepare pnpm@latest --activate
-
-    - name: Install dependencies
-      run: pnpm install
-
-    - name: Install C++ tools and gtest
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y build-essential cmake libgtest-dev
-        cd /usr/src/gtest
-        sudo cmake .
-        sudo make
-        sudo cp lib/*.a /usr/lib
-
-    - name: Run JavaScript Tests
-      run: pnpm test:js
-
-    - name: Run C++ Tests
-      run: pnpm test:cpp
+      - name: Run C++ Tests
+        run: pnpm test:cpp
