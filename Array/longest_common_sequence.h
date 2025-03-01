@@ -1,6 +1,7 @@
 #ifndef LONGEST_COMMON_SEQUENCE_H
 #define LONGEST_COMMON_SEQUENCE_H
 
+#include <algorithm>
 #include <vector>
 
 template <typename T>
