@@ -56,9 +56,21 @@ TEST(UpperBoundTest, TargetAtEnd) {
 }
 
 TEST(UpperBoundTest, TargetNotInList) {
+  std::vector<int> vec = {1, 2, 4, 5, 6, 7, 8, 9, 10};
+  auto result = upperBound(vec.begin(), vec.end(), 3);
+  EXPECT_EQ(result, vec.begin() + 2);
+}
+
+TEST(UpperBoundTest, TargetLargerThanAll) {
   std::vector<int> vec = {1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10};
   auto result = upperBound(vec.begin(), vec.end(), 11);
   EXPECT_EQ(result, vec.end());
+}
+
+TEST(UpperBoundTest, TargetLessThanAll) {
+  std::vector<int> vec = {1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  auto result = upperBound(vec.begin(), vec.end(), -11);
+  EXPECT_EQ(result, vec.begin());
 }
 
 TEST(UpperBoundTest, EmptyList) {
@@ -89,9 +101,21 @@ TEST(LowerBoundTest, TargetAtEnd) {
 }
 
 TEST(LowerBoundTest, TargetNotInList) {
+  std::vector<int> vec = {1, 2, 4, 5, 6, 7, 8, 9, 10};
+  auto result = lowerBound(vec.begin(), vec.end(), 3);
+  EXPECT_EQ(result, vec.begin() + 2);
+}
+
+TEST(LowerBoundTest, TargetLargerThanAll) {
   std::vector<int> vec = {1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-  auto result = lowerBound(vec.begin(), vec.end(), 11);
+  auto result = upperBound(vec.begin(), vec.end(), 11);
   EXPECT_EQ(result, vec.end());
+}
+
+TEST(LowerBoundTest, TargetLessThanAll) {
+  std::vector<int> vec = {1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  auto result = upperBound(vec.begin(), vec.end(), -11);
+  EXPECT_EQ(result, vec.begin());
 }
 
 TEST(LowerBoundTest, EmptyList) {
