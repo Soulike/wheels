@@ -32,9 +32,20 @@ void Dijkstra::BuildShortestDistanceToOtherVertexes(
     const DistanceType current_distance = min_distance_edge.GetDistance();
     const VertexType current_vertex = min_distance_edge.GetDestination();
 
+    // The virtual edge in the heap is outdated. Skip.
     if (current_distance > minimum_distance_to_vertexes_[current_vertex]) {
       continue;
     }
+
+    // Here `minimum_distance_to_vertexes_[current_vertex]` is guaranteed to be
+    // the minimum distance between starting vertex and current vertex.
+    // Proof:
+    // Assume we have stating vertex s, current vertex u, another vertex v, and
+    // the minimum distance of s -> v -> u is smaller than s -> u.
+    // The minimum distance of s -> v must be smaller than s -> u.
+    // Since we are using min heap, so v should be handled before u.
+    // But to fulfill the assumption, we must have u handled before v.
+    // So the assumption is impossible.
 
     const auto& adjacencies = adjacency_list[current_vertex];
     for (const Edge& edge : adjacencies) {
