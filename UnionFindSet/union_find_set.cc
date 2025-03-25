@@ -1,4 +1,5 @@
 #include "union_find_set.h"
+#include <cstdlib>
 
 UnionFindSet::UnionFindSet(const SizeType element_number)
     : set_number_(element_number),
@@ -23,7 +24,6 @@ void UnionFindSet::AddSet() {
   parents_.push_back(set_element);
   set_size_[set_element] = 1;
 }
-
 
 void UnionFindSet::Union(const ElementType& element1,
                          const ElementType& element2) {
