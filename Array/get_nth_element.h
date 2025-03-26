@@ -7,10 +7,10 @@
 
 // `n` starts with 0.
 template <typename RandomIterator>
-RandomIterator GetNthElement(const std::uint64_t& n,
-                             const RandomIterator& begin,
-                             const RandomIterator& end) {
-  std::function<RandomIterator(RandomIterator, RandomIterator)> impl =
+RandomIterator GetNthElement(const std::uint64_t n,
+                             const RandomIterator begin,
+                             const RandomIterator end) {
+  const std::function<RandomIterator(RandomIterator, RandomIterator)> impl =
       [&](const RandomIterator range_begin, const RandomIterator range_end) {
         if (range_begin >= range_end) {
           return end;
