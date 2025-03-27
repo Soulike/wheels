@@ -9,8 +9,8 @@ template <typename ForwardIterator>
 std::optional<typename std::iterator_traits<ForwardIterator>::value_type>
 FindMajorityElement(ForwardIterator begin, ForwardIterator end) {
   ForwardIterator current_element_it = begin;
-  std::uintmax_t current_element_vote = 0;
-  std::uintmax_t element_number = 0;
+  size_t current_element_vote = 0;
+  size_t element_number = 0;
 
   for (auto it = begin; it != end; it++) {
     element_number++;
@@ -26,7 +26,7 @@ FindMajorityElement(ForwardIterator begin, ForwardIterator end) {
   }
 
   const auto& possible_majority_element = *current_element_it;
-  std::uintmax_t possible_majority_element_number = 0;
+  size_t possible_majority_element_number = 0;
 
   for (auto it = begin; it != end; it++) {
     if (*it == possible_majority_element) {
