@@ -1,6 +1,7 @@
 #ifndef BACKPACK_ALGORITHM_H
 #define BACKPACK_ALGORITHM_H
 
+#include <cstdint>
 #include <vector>
 
 std::uint64_t Knapsack(std::uint64_t capacity,
