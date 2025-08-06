@@ -6,6 +6,7 @@
 #define SEGMENT_TREE_H
 
 #include <memory>
+#include <optional>
 #include <vector>
 
 template <typename ElementT>
@@ -50,7 +51,7 @@ class SegmentTree {
       Build(elements);
     }
 
-    std::optional<size_t> FindFirstElementGreaterEqualThan(
+    [[nodiscard]] std::optional<size_t> FindFirstElementGreaterEqualThan(
         const ElementT& element) const {
       if (value_range_.max < element) {
         return std::nullopt;
@@ -121,12 +122,17 @@ class SegmentTree {
           std::max(left_child_value_range.max, right_child_value_range.max)};
     }
 
-    const IndexRange& GetIndexRange() const { return index_range_; }
+    [[nodiscard]] const IndexRange& GetIndexRange() const {
+      return index_range_;
+    }
 
     [[nodiscard]] bool IsInIndexRange(const size_t index) const {
       return index_range_.begin <= index && index <= index_range_.end;
     }
-    const ValueRange& GetValueRange() const { return value_range_; }
+
+    [[nodiscard]] const ValueRange& GetValueRange() const {
+      return value_range_;
+    }
 
     [[nodiscard]] bool IsInValueRange(const ElementT& element) const {
       return value_range_.min <= element && element <= value_range_.max;
@@ -137,7 +143,7 @@ class SegmentTree {
     }
 
    private:
-    IndexRange index_range_;
+    const IndexRange index_range_;
     ValueRange value_range_;
 
     std::unique_ptr<Node> left_child_ = nullptr;
