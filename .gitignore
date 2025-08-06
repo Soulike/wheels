@@ -53,6 +53,7 @@
 
 # CMake
 cmake-build-*/
+build/
 
 # File-based project format
 *.iws
